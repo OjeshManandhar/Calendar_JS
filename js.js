@@ -21,6 +21,7 @@ function createCalendar(date = new Date()) {
   const container = document.getElementById('news-table').appendChild(document.createElement('div'));
   container.className = 'table-container';
 
+  // month-year
   const monthYear = container.appendChild(document.createElement('div'));
   monthYear.className = 'month-year';
 
@@ -40,6 +41,19 @@ function createCalendar(date = new Date()) {
   const nextYear = monthYear.appendChild(document.createElement('dev'));
   nextYear.className = 'next-month';
   nextYear.innerHTML = '>';
+
+  // table
+  const table = container.appendChild(document.createElement('table'));
+  
+  weekdays = table.appendChild(document.createElement('tr'));
+  weekdays.className = 'weekdays';
+  weekdays.appendChild(document.createElement('td')).innerHTML = 'Su';
+  weekdays.appendChild(document.createElement('td')).innerHTML = 'Mo';
+  weekdays.appendChild(document.createElement('td')).innerHTML = 'Tu';
+  weekdays.appendChild(document.createElement('td')).innerHTML = 'We';
+  weekdays.appendChild(document.createElement('td')).innerHTML = 'Th';
+  weekdays.appendChild(document.createElement('td')).innerHTML = 'Fr';
+  weekdays.appendChild(document.createElement('td')).innerHTML = 'Sa';
 }
 
 createCalendar();
