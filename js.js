@@ -1,4 +1,23 @@
-function createCalendar() {
+function monthName(month) {
+  const monthList = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ]
+
+  return monthList[month];
+}
+
+function createCalendar(date = new Date()) {
   const container = document.getElementById('news-table').appendChild(document.createElement('div'));
   container.className = 'table-container';
 
@@ -13,10 +32,10 @@ function createCalendar() {
   curYear.className = 'cur-month';
   const month = curYear.appendChild(document.createElement('div'));
   month.className = 'month';
-  month.innerHTML = 'August';
+  month.innerHTML = monthName(date.getMonth());
   const year = curYear.appendChild(document.createElement('div'));
   year.className = 'year';
-  year.innerHTML = '2019';
+  year.innerHTML = date.getFullYear();
 
   const nextYear = monthYear.appendChild(document.createElement('dev'));
   nextYear.className = 'next-month';
