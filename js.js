@@ -1,4 +1,4 @@
-function monthName(month) {
+function monthName(date) {
   const monthList = [
     'January',
     'February',
@@ -14,7 +14,20 @@ function monthName(month) {
     'December'
   ]
 
-  return monthList[month];
+  return monthList[date.getMonth()];
+}
+
+function noOfDays(date) {
+  const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
+  if (((year%400 === 0) || (year%100 !== 0 && year%4 === 0)) && (month === 1)) {
+    return 29;
+  }
+
+  return days[month];
 }
 
 function createCalendar(date = new Date()) {
@@ -33,7 +46,7 @@ function createCalendar(date = new Date()) {
   curYear.className = 'cur-month';
   const month = curYear.appendChild(document.createElement('div'));
   month.className = 'month';
-  month.innerHTML = monthName(date.getMonth());
+  month.innerHTML = monthName(date);
   const year = curYear.appendChild(document.createElement('div'));
   year.className = 'year';
   year.innerHTML = date.getFullYear();
@@ -54,6 +67,39 @@ function createCalendar(date = new Date()) {
   weekdays.appendChild(document.createElement('td')).innerHTML = 'Th';
   weekdays.appendChild(document.createElement('td')).innerHTML = 'Fr';
   weekdays.appendChild(document.createElement('td')).innerHTML = 'Sa';
+
+  let week, day;
+  let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  let sum = noOfDays(date) + firstDay;
+  let noOfWeeks = Math.floor(sum/7);
+  if (sum%7 !== 0) {
+    noOfWeeks++;
+  }
+  for (var i = 0; i < noOfWeeks*7; i++) {
+    if (i%7 === 0) {
+      week = table.appendChild(document.createElement('tr'));
+      week.className = 'day';
+    }
+    
+    if (i < firstDay || i >= sum) {
+      day = week.appendChild(document.createElement('td'));
+      day.className = 'disable';
+    } else {
+      day = week.appendChild(document.createElement('td'));
+      day.innerHTML = (i - firstDay + 1);
+
+      var newDate = new Date();
+      // dosent work as it compares time also
+      // if (new Date() === new Date(date.getFullYear(), date.getMonth(), (i - firstDay + 1))) {
+      if (
+        newDate.getFullYear() === date.getFullYear() &&
+        newDate.getMonth() === date.getMonth() &&
+        newDate.getDate() === (i - firstDay + 1)
+      ) {
+        day.className = 'active';
+      }
+    }
+  }
 }
 
 createCalendar();
