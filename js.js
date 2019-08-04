@@ -31,7 +31,7 @@ function noOfDays(date) {
 }
 
 function createCalendar(date = new Date()) {
-  const container = document.getElementById('news-table').appendChild(document.createElement('div'));
+  const container = document.getElementById('news-calendar').appendChild(document.createElement('div'));
   container.className = 'table-container';
 
   // month-year
