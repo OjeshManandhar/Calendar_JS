@@ -68,23 +68,31 @@ function createCalendar(date = new Date()) {
   weekdays.appendChild(document.createElement('td')).innerHTML = 'Fr';
   weekdays.appendChild(document.createElement('td')).innerHTML = 'Sa';
 
-  let week, day;
+  let week, day, prevMonDate, nextMonthDate = 1;
   let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   let sum = noOfDays(date) + firstDay;
   let noOfWeeks = Math.floor(sum/7);
   if (sum%7 !== 0) {
     noOfWeeks++;
   }
+
+  if (date.getMonth() === 0) {
+    prevMonDate = noOfDays(new Date(date.getFullYear() - 1, 11)) - firstDay + 1;
+  } else {
+    prevMonDate = noOfDays(new Date(date.getFullYear(), date.getMonth() - 1)) - firstDay + 1;
+  }
+
   for (var i = 0; i < noOfWeeks*7; i++) {
     if (i%7 === 0) {
       week = table.appendChild(document.createElement('tr'));
       week.className = 'day';
     }
     
-    if (i < firstDay || i >= sum) {
+    if (i < firstDay) {
       day = week.appendChild(document.createElement('td'));
+      day.innerHTML = prevMonDate++;
       day.className = 'disable';
-    } else {
+    } else if (i < sum) {
       day = week.appendChild(document.createElement('td'));
       day.innerHTML = (i - firstDay + 1);
 
@@ -98,6 +106,10 @@ function createCalendar(date = new Date()) {
       ) {
         day.className = 'active';
       }
+    } else {
+      day = week.appendChild(document.createElement('td'));
+      day.innerHTML = nextMonthDate++;
+      day.className = 'disable';
     }
   }
 }
