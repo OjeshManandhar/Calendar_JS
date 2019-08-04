@@ -1,6 +1,6 @@
 .table-container {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border: 1px solid black;
 }
 
@@ -8,6 +8,8 @@ table {
   height: 100%;
   width: 100%;
   text-align: center;
+  /* for tr border un-comment this */
+  /* border-collapse: collapse; */
 }
 
 tr {
@@ -15,9 +17,12 @@ tr {
 }
 
 td {
+  padding: 0px;
+  margin: 0px;
   border: 1px solid black;
 }
 
 td:hover {
-  border: 1px solid white;
+  border: 1px solid black;
+  border-radius: 50%;
 }
