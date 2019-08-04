@@ -13,6 +13,11 @@
   align-items: center;
   padding: 5px 10px;
   border-radius: 15px 15px 0px 0px;
+
+  background-color: #e9eaf0;
+  color: #4c5373;
+  font: 300 28px "Open Sans";
+  text-transform: uppercase;
 }
 
 .month-year * {
@@ -20,7 +25,7 @@
   /* border: 1px solid red; */
 }
 
-.month-year .cur-month{
+.month-year .cur-month {
   flex-grow: 1;
 }
 
@@ -42,39 +47,32 @@ table {
   border: 1px solid red;
 } */
 
-.month-year {
-  background-color: #e9eaf0;
-  color: #4c5373;
-  font: 300 28px "Open Sans";
-  text-transform: uppercase;
-}
-
 .weekdays {
   color: #91d9ff;
   text-transform: uppercase;
   font-weight: 600;
 }
 
-.date td {
+.day td {
   width: 14.28% !important;
   color: #4c5373;
   box-shadow: inset 0 0 1px 1px #d9dce5;
   border-radius: 2px;
 }
 
-.date td.disable {
+.day td.disable {
   color: #b6bacc;
   box-shadow: inset 0 0 1px 1px #f3f4f7;
 }
 
-.date td:not(.disable):hover {
+.day td:not(.disable):hover {
   background: #cdd0dd;
   box-shadow: inset 0 0 1px 1px #d9dce5, 0 1px 3px -1px #cdd0dd;
 }
 
-.date td.active,
-.date td.active:hover,
-.date td.active:active {
+.day td.active,
+.day td.active:hover,
+.day td.active:active {
   color: #fff;
   box-shadow: inset 0 0 1px 1px #ff8263, 0 1px 3px -1px #ff8263;
   background: #ff8263;
