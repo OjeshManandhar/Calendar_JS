@@ -30,7 +30,7 @@
 }
 
 table {
-  height: 250px;
+  /* height: 250px; */
   width: 300px;
   text-align: center;
   font: 16px "Open Sans";
@@ -42,10 +42,11 @@ table {
   border-spacing: 5px;
 }
 
-/* dosnet work if border-collapse: collapse is not set in <table> */
-/* tr {
-  border: 1px solid red;
-} */
+/* border dosnet work if border-collapse: collapse is not set in <table> */
+tr {
+  /* border: 1px solid red; */
+  height: 35px;
+}
 
 .weekdays {
   color: #91d9ff;
