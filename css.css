@@ -1,0 +1,23 @@
+.table-container {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+table {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+tr {
+  border: 1px solid red;
+}
+
+td {
+  border: 1px solid black;
+}
+
+td:hover {
+  border: 1px solid white;
+}
