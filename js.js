@@ -59,7 +59,7 @@ function findNewsOnDate(date) {
     return news;
 }
 
-function createCalendar(date = new Date()) {
+function renderMonthYear(date) {
     const container = document.getElementById('news-calendar').appendChild(document.createElement('div'));
     container.className = 'calendar-container';
 
@@ -83,6 +83,16 @@ function createCalendar(date = new Date()) {
     const nextYear = monthYear.appendChild(document.createElement('dev'));
     nextYear.className = 'next-month';
     nextYear.innerHTML = '>';
+}
+
+function renderDates(date) {
+    var container = document.getElementById('news-calendar');
+    for (var i = 0; i < container.childNodes.length; i++) {
+        if (container.childNodes[i].className === 'calendar-container'){
+            container = container.childNodes[i];
+            break;
+        }
+    }
 
     // table
     const table = container.appendChild(document.createElement('table'));
@@ -157,9 +167,14 @@ function createCalendar(date = new Date()) {
 
         day.id = id;
         day.addEventListener('click', function(e) {
-        alert(findNewsOnDate(this.id));
+            alert(findNewsOnDate(this.id));
         });
     }
+}
+
+function createCalendar(date = new Date()) {
+    renderMonthYear(date);
+    renderDates(date);
 }
 
 // createCalendar(new Date());
