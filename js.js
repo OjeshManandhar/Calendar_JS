@@ -40,9 +40,9 @@ function generateId(date, day) {
     }
 
     if (day < 10) {
-        id += `0${day}`;
+        id += `0${day}-cal`;
     } else {
-        id += `${day}`;
+        id += `${day}-cal`;
     }
 
     return id;
@@ -50,6 +50,9 @@ function generateId(date, day) {
 
 function findNewsOnDate(date) {
     var news = null;
+
+    date = date.replace('-cal', '');
+    console.log('date:', date);
 
     for (var key in newsEvents) {
         if (key === date) {
@@ -198,6 +201,10 @@ function renderCalendar(date = new Date()) {
             alert(findNewsOnDate(this.id));
         });
     }
+}
+
+function renderNewsList() {
+    const newsListing = document.getElementById('news-listing');
 }
 
 // createCalendar(new Date());
