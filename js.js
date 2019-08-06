@@ -33,10 +33,10 @@ function noOfDays(date) {
 function generateId(date, day) {
   var id = `${date.getFullYear()}-`;
 
-  if (date.getMonth() < 10) {
-    id += `0${date.getMonth()}-`;
+  if ((date.getMonth() + 1) < 10) {
+    id += `0${date.getMonth() + 1}-`;
   } else {
-    id += `${date.getMonth()}-`;
+    id += `${date.getMonth() + 1}-`;
   }
 
   if (day < 10) {
@@ -46,6 +46,17 @@ function generateId(date, day) {
   }
 
   return id;
+}
+
+function findNewsOnDate(date) {
+  var news = null;
+
+  for (var key in newsEvents) {
+    if (key === date) {
+      news = newsEvents[key][0] + '\n\n' + newsEvents[key][1];
+    }
+  }
+  return news;
 }
 
 function createCalendar(date = new Date()) {
@@ -146,10 +157,10 @@ function createCalendar(date = new Date()) {
 
     day.id = id;
     day.addEventListener('click', function(e) {
-      alert(this.id);
+      alert(findNewsOnDate(this.id));
     });
   }
 }
 
-// createCalendar(new Date(2019, 0));
-createCalendar(new Date(2019, 11));
+// createCalendar(new Date());
+createCalendar(new Date(2019, 6));
