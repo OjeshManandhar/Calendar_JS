@@ -25,6 +25,11 @@
     /* border: 1px solid red; */
 }
 
+.month-year .prev-month:hover,
+.month-year .next-month:hover {
+    color: #ff8263;
+}
+
 .month-year .cur-month {
     flex-grow: 1;
 }
