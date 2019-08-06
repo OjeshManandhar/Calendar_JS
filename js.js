@@ -73,7 +73,7 @@ function removeCalendar() {
     newsCalendar.removeChild(calendarContainer);
 }
 
-function renderMonthYear(date) {
+function renderCalendar(date = new Date()) {
     const container = document.getElementById('news-calendar').appendChild(document.createElement('div'));
     container.className = 'calendar-container';
 
@@ -81,10 +81,10 @@ function renderMonthYear(date) {
     const monthYear = container.appendChild(document.createElement('div'));
     monthYear.id = 'month-year';
 
-    const prevYear = monthYear.appendChild(document.createElement('dev'));
-    prevYear.className = 'prev-month';
-    prevYear.innerHTML = '<';
-    prevYear.addEventListener('click', function(e) {
+    const prevMonth = monthYear.appendChild(document.createElement('dev'));
+    prevMonth.className = 'prev-month';
+    prevMonth.innerHTML = '<';
+    prevMonth.addEventListener('click', function(e) {
         var prevMon;
 
         if (date.getMonth() === 0) {
@@ -94,7 +94,7 @@ function renderMonthYear(date) {
         }
 
         removeCalendar();
-        createCalendar(prevMon);
+        renderCalendar(prevMon);
     });
 
     const curYear = monthYear.appendChild(document.createElement('dev'));
@@ -106,10 +106,10 @@ function renderMonthYear(date) {
     year.className = 'year';
     year.innerHTML = date.getFullYear();
 
-    const nextYear = monthYear.appendChild(document.createElement('dev'));
-    nextYear.className = 'next-month';
-    nextYear.innerHTML = '>';
-    nextYear.addEventListener('click', function(e) {
+    const nextMonth = monthYear.appendChild(document.createElement('dev'));
+    nextMonth.className = 'next-month';
+    nextMonth.innerHTML = '>';
+    nextMonth.addEventListener('click', function(e) {
         var nextMon;
 
         if (date.getMonth() === 11) {
@@ -119,18 +119,8 @@ function renderMonthYear(date) {
         }
 
         removeCalendar();
-        createCalendar(nextMon);
+        renderCalendar(nextMon);
     });
-}
-
-function renderDates(date) {
-    var container = document.getElementById('news-calendar');
-    for (var i = 0; i < container.childNodes.length; i++) {
-        if (container.childNodes[i].className === 'calendar-container'){
-            container = container.childNodes[i];
-            break;
-        }
-    }
 
     // table
     const table = container.appendChild(document.createElement('table'));
@@ -210,10 +200,5 @@ function renderDates(date) {
     }
 }
 
-function createCalendar(date = new Date()) {
-    renderMonthYear(date);
-    renderDates(date);
-}
-
 // createCalendar(new Date());
-createCalendar(new Date(2019, 6));
+renderCalendar();
