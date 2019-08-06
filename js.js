@@ -30,6 +30,24 @@ function noOfDays(date) {
   return days[month];
 }
 
+function generateId(date, day) {
+  var id = `${date.getFullYear()}-`;
+
+  if (date.getMonth() < 10) {
+    id += `0${date.getMonth()}-`;
+  } else {
+    id += `${date.getMonth()}-`;
+  }
+
+  if (day < 10) {
+    id += `0${day}`;
+  } else {
+    id += `${day}`;
+  }
+
+  return id;
+}
+
 function createCalendar(date = new Date()) {
   const container = document.getElementById('news-calendar').appendChild(document.createElement('div'));
   container.className = 'calendar-container';
@@ -72,8 +90,7 @@ function createCalendar(date = new Date()) {
   let week, day, id;
   let prevMon, nextMon, prevMonDate, curMonDate, nextMonthDate;
   let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  // let sum = noOfDays(date) + firstDay;
-  let sum = 28 + firstDay;
+  let sum = noOfDays(date) + firstDay;
   let noOfWeeks = Math.floor(sum/7);
   if (sum%7 !== 0) {
     noOfWeeks++;
@@ -100,13 +117,13 @@ function createCalendar(date = new Date()) {
     }
     
     if (i < firstDay) {
-      id = `${prevMon.getFullYear()}-${prevMon.getMonth() + 1}-${prevMonDate}`;
+      id = generateId(prevMon, prevMonDate);
       day = week.appendChild(document.createElement('td'));
       day.innerHTML = prevMonDate++;
       day.className = 'disable';
     } else if (i < sum) {
       curMonDate = i - firstDay + 1;
-      id = `${date.getFullYear()}-${date.getMonth() + 1}-${curMonDate}`;
+      id = generateId(date, curMonDate);
       day = week.appendChild(document.createElement('td'));
       day.innerHTML = curMonDate;
 
@@ -121,7 +138,7 @@ function createCalendar(date = new Date()) {
         day.className = 'active';
       }
     } else {
-      id = `${nextMon.getFullYear()}-${nextMon.getMonth() + 1}-${nextMonthDate}`;
+      id = generateId(nextMon, nextMonthDate);
       day = week.appendChild(document.createElement('td'));
       day.innerHTML = nextMonthDate++;
       day.className = 'disable';
@@ -135,4 +152,4 @@ function createCalendar(date = new Date()) {
 }
 
 // createCalendar(new Date(2019, 0));
-createCalendar(new Date());
+createCalendar(new Date(2019, 11));
