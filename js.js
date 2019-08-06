@@ -59,17 +59,43 @@ function findNewsOnDate(date) {
     return news;
 }
 
+function removeCalendar() {
+    const newsCalendar = document.getElementById('news-calendar');
+    var calendarContainer;
+
+    for (var i = 0; i < newsCalendar.childNodes.length; i++) {
+        if (newsCalendar.childNodes[i].className == "calendar-container") {
+            calendarContainer = newsCalendar.childNodes[i];
+          break;
+        }        
+    }
+
+    newsCalendar.removeChild(calendarContainer);
+}
+
 function renderMonthYear(date) {
     const container = document.getElementById('news-calendar').appendChild(document.createElement('div'));
     container.className = 'calendar-container';
 
     // month-year
     const monthYear = container.appendChild(document.createElement('div'));
-    monthYear.className = 'month-year';
+    monthYear.id = 'month-year';
 
     const prevYear = monthYear.appendChild(document.createElement('dev'));
     prevYear.className = 'prev-month';
     prevYear.innerHTML = '<';
+    prevYear.addEventListener('click', function(e) {
+        var prevMon;
+
+        if (date.getMonth() === 0) {
+            prevMon = new Date(date.getFullYear() - 1, 11, 1);
+        } else {
+            prevMon = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+        }
+
+        removeCalendar();
+        createCalendar(prevMon);
+    });
 
     const curYear = monthYear.appendChild(document.createElement('dev'));
     curYear.className = 'cur-month';
@@ -83,6 +109,18 @@ function renderMonthYear(date) {
     const nextYear = monthYear.appendChild(document.createElement('dev'));
     nextYear.className = 'next-month';
     nextYear.innerHTML = '>';
+    nextYear.addEventListener('click', function(e) {
+        var nextMon;
+
+        if (date.getMonth() === 11) {
+            nextMon = new Date(date.getFullYear() + 1, 1, 1);
+        } else {
+            nextMon = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+        }
+
+        removeCalendar();
+        createCalendar(nextMon);
+    });
 }
 
 function renderDates(date) {
@@ -96,7 +134,7 @@ function renderDates(date) {
 
     // table
     const table = container.appendChild(document.createElement('table'));
-    table.className = 'calendar-table';
+    table.id = 'calendar-table';
 
     weekdays = table.appendChild(document.createElement('tr'));
     weekdays.className = 'weekdays';
